@@ -14,7 +14,11 @@ func ConnectDB() {
 		panic("Failed to connect database")
 	}
 
-	//db.AutoMigrate(&models.User{})
+	//db.AutoMigrate(&entities.Division{})
+	//db.AutoMigrate(&entities.Group{})
+	//db.AutoMigrate(&entities.Person{})
+	//db.AutoMigrate(&entities.PlaceOfBirth{})
+	//db.AutoMigrate(&entities.Address{})
 
 	DB = db
 	log.Println("Database connected...")

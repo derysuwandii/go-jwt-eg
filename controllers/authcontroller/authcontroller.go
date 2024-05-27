@@ -2,13 +2,13 @@ package authcontroller
 
 import (
 	"go-jwt-eg/configs"
+	"go-jwt-eg/entities"
 	"go-jwt-eg/helpers"
-	"go-jwt-eg/models"
 	"net/http"
 )
 
 func Register(w http.ResponseWriter, r *http.Request) {
-	var register models.Register
+	var register entities.Register
 
 	if err := helpers.DecodeBody(w, r, &register); err != nil {
 		return
@@ -27,7 +27,7 @@ func Register(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	user := models.User{
+	user := entities.User{
 		Name:     register.Name,
 		Email:    register.Email,
 		Password: passwordHash,
@@ -42,13 +42,13 @@ func Register(w http.ResponseWriter, r *http.Request) {
 }
 
 func Login(w http.ResponseWriter, r *http.Request) {
-	var login models.Login
+	var login entities.Login
 
 	if err := helpers.DecodeBody(w, r, &login); err != nil {
 		return
 	}
 
-	var user models.User
+	var user entities.User
 	if err := configs.DB.First(&user, "email=?", login.Email).Error; err != nil {
 		helpers.Response(w, http.StatusNotFound, "Wrong email or password", nil)
 		return
@@ -65,7 +65,7 @@ func Login(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	loginRes := models.LoginRes{
+	loginRes := entities.LoginRes{
 		Name:  user.Name,
 		Email: user.Email,
 		Token: token,

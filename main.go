@@ -16,7 +16,8 @@ func main() {
 
 	routes.AuthRoutes(router)
 	routes.UserRoutes(router)
+	routes.PersonRoutes(router)
 
-	log.Println("Server running on port 8080")
-	http.ListenAndServe(":8080", router)
+	log.Println("Server running on port 8081")
+	http.ListenAndServe(":8081", router)
 }

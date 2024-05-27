@@ -3,7 +3,7 @@ package helpers
 import (
 	"fmt"
 	"github.com/golang-jwt/jwt/v5"
-	"go-jwt-eg/models"
+	"go-jwt-eg/entities"
 	"time"
 )
 
@@ -16,7 +16,7 @@ type MyCustomClaims struct {
 	jwt.RegisteredClaims
 }
 
-func CreateToken(user *models.User) (string, error) {
+func CreateToken(user *entities.User) (string, error) {
 	claims := MyCustomClaims{
 		user.ID, user.Name, user.Email,
 		jwt.RegisteredClaims{
